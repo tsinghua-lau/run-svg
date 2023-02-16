@@ -1,0 +1,14 @@
+{
+  "name": "run-svg",
+  "version": "1.6.7",
+  "description": "让svg动起来",
+  "main": "run-svg.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "run-svg"
+  ],
+  "author": "",
+  "license": "ISC"
+}
