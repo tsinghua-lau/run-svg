@@ -1,48 +1,57 @@
-import { defineComponent as y, useCssVars as C, unref as S, toRefs as E, ref as o, onMounted as R, openBlock as h, createElementBlock as m, renderSlot as k } from "vue";
-const T = ["stroke", "stroke-width"], W = {
+import { defineComponent as v, useCssVars as k, unref as $, toRefs as y, ref as d, onMounted as w, openBlock as h, createElementBlock as p, renderSlot as _, createCommentVNode as B, nextTick as C } from "vue";
+const S = ["stroke", "stroke-width"], x = {
   name: "RunSvg"
-}, L = /* @__PURE__ */ y({
-  ...W,
+}, R = /* @__PURE__ */ v({
+  ...x,
   props: {
     loop: { type: Boolean, default: !1 },
     num: { default: 2 },
     duration: { default: 2 },
     stroke: { default: "red" },
     lineWidth: { default: 3 },
-    fillColor: { default: "#000" }
+    fillColor: { default: "#000" },
+    reset: { type: Boolean, default: !0 }
   },
   setup(t) {
     const n = t;
-    C((a) => ({
-      e91ec6e4: S(i),
-      b3047a7c: f.value,
-      b3047a7a: d.value,
-      b3047a78: v.value,
-      b3047a76: g.value,
-      b3047a74: _.value,
-      b3047a72: p.value,
-      b3047a70: b.value,
-      b3047a6e: $.value,
-      b3047a6c: w.value,
-      "293a95ae": x.value
+    k((o) => ({
+      f93507c4: $(m),
+      "1e7b8e7f": f(i.value + 4)
     }));
-    let { loop: s, num: u, duration: r, fillColor: i } = E(n);
-    s.value || u.value;
-    const f = o(), d = o(), v = o(), g = o(), _ = o(), p = o(), b = o(), $ = o(), w = o(), x = o();
-    R(() => {
-      const a = document.querySelectorAll("#logo path");
-      if (a.length) {
-        let c = 0;
-        for (let l = 0; l < a.length; l++) {
-          const e = a[l].getTotalLength();
-          console.log("c第", l, "个", e), l == 0 && (f.value = e, console.log("第一个结束", e)), l == 1 && (d.value = e, console.log("第二个结束", e)), l == 2 && (v.value = e, console.log("第三个结束", e)), l == 3 && (g.value = e, console.log("第四个结束", e)), l === 4 && (_.value = e, console.log("第五个结束", e)), l === 5 && (p.value = e, console.log("第六个结束", e)), c = c > e ? c : e;
+    let { loop: l, num: r, duration: a, reset: c, fillColor: m } = y(n);
+    l.value || r.value;
+    const i = d(0), u = d(!0), f = (o) => {
+      const e = [];
+      e[1] = 0, e[2] = 300;
+      for (let s = 3; s <= o; s++)
+        e[s] = e[s - 1] + 200;
+      return e[o] + "ms";
+    };
+    w(() => {
+      const o = document.querySelectorAll("#logo path");
+      if (o.length) {
+        i.value = o.length;
+        for (let e = 0; e < o.length; e++) {
+          const s = o[e].getTotalLength();
+          document.styleSheets[0].insertRule(
+            `.icon path:nth-child(${e + 1}) {
+        stroke-dasharray: ${s};
+        stroke-dashoffset:${s};
+        animation: line-anm 2s ease forwards ${f(e + 1)};
+        } `,
+            0
+          );
         }
-        B.value = 2e3, console.log(c), console.log("fill结束");
       } else
         throw new Error("没找到svg下的path");
     });
-    const B = o(0);
-    return (a, c) => (h(), m("svg", {
+    const g = () => {
+      c.value && (u.value = !1, C(() => {
+        u.value = !0;
+      }));
+    };
+    return (o, e) => u.value ? (h(), p("svg", {
+      key: 0,
       id: "logo",
       class: "icon",
       stroke: t.stroke,
@@ -50,32 +59,33 @@ const T = ["stroke", "stroke-width"], W = {
       "stroke-width": t.lineWidth,
       hegiht: "200",
       width: "200",
-      viewBox: "0 0 1024 1024"
+      viewBox: "0 0 1024 1024",
+      onClick: g
     }, [
-      k(a.$slots, "default")
-    ], 8, T));
+      _(o.$slots, "default")
+    ], 8, S)) : B("", !0);
   }
 });
-const M = {
+const T = {
   name: "TestButton"
-}, q = (t, n) => {
-  const s = t.__vccOpts || t;
-  for (const [u, r] of n)
-    s[u] = r;
-  return s;
+}, E = (t, n) => {
+  const l = t.__vccOpts || t;
+  for (const [r, a] of n)
+    l[r] = a;
+  return l;
 };
-function A(t, n, s, u, r, i) {
-  return h(), m("button", null, [
-    k(t.$slots, "default")
+function L(t, n, l, r, a, c) {
+  return h(), p("button", null, [
+    _(t.$slots, "default")
   ]);
 }
-const I = /* @__PURE__ */ q(M, [["render", A]]), O = [L, I], V = {
+const b = /* @__PURE__ */ E(T, [["render", L]]), N = [R, b], W = {
   install(t) {
-    O.forEach((n) => {
+    N.forEach((n) => {
       console.log(n.name), t.component(n.name, n);
     });
   }
 };
 export {
-  V as default
+  W as default
 };

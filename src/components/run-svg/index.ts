@@ -1,9 +1,8 @@
 import RunSvg from "./RunSvg.vue";
 import TestButton from "./TestButton.vue";
-
 const component = [RunSvg, TestButton];
 
-const MukUI = {
+const CK = {
   install(App: any) {
     component.forEach((item) => {
       console.log(item.name);
@@ -12,4 +11,4 @@ const MukUI = {
   },
 };
 
-export default MukUI;
+export default CK;
